@@ -12,6 +12,8 @@ request_deduplicator = { git = "https://github.com/poorlydefinedbehaviour/reques
 # Example
 
 ```rust
+use request_deduplicator::RequestDeduplicator;
+
 const NUM_TASKS: usize = 10_000;
 
 let deduplicator = RequestDeduplicator::new();
