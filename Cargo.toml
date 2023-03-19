@@ -1,0 +1,15 @@
+[package]
+name = "request_deduplicator"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.70"
+crossbeam-skiplist = "0.1.1"
+futures = "0.3.27"
+tokio = { version = "1.26.0", features = ["macros", "time", "sync"] }
+
+[dev-dependencies]
+tokio = { version = "1.26.0", features = ["rt-multi-thread", "macros", "time", "sync"] }
