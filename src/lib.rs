@@ -12,7 +12,6 @@ where
     K: Ord,
 {
     requests_in_flight: Arc<SkipMap<K, Task<I, V>>>,
-    // requests_in_flight: Arc<RwLock<HashMap<K, broadcast::Receiver<V>>>>,
 }
 
 #[derive(Debug)]
