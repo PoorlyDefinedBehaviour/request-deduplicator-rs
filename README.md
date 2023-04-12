@@ -6,7 +6,7 @@ Deduplicate tasks based on a key.
 
 ```toml
 [dependencies]
-request_deduplicator = { git = "https://github.com/poorlydefinedbehaviour/request-deduplicator-rs", tag = "v0.0.1" }
+request_deduplicator = { git = "https://github.com/poorlydefinedbehaviour/request-deduplicator-rs", tag = "v0.0.2" }
 ```
 
 # Example
