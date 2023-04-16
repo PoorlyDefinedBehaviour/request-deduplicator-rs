@@ -1,5 +1,6 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{Context, Result};
 use crossbeam_skiplist::SkipMap;
+use tracing::error;
 
 use std::{future::Future, sync::Arc};
 use tokio::sync::broadcast;
@@ -18,6 +19,17 @@ where
 struct Task<I, V> {
     id: I,
     receiver: broadcast::Receiver<V>,
+}
+
+impl<I, K, V> Default for RequestDeduplicator<I, K, V>
+where
+    K: Ord + Send + 'static,
+    V: Clone + Send + 'static,
+    I: PartialEq + Send + Clone + 'static,
+{
+    fn default() -> Self {
+        RequestDeduplicator::new()
+    }
 }
 
 impl<I, K, V> RequestDeduplicator<I, K, V>
@@ -56,11 +68,12 @@ where
             // Yield so other tasks have a chance of resubscribing to the receiver.
             tokio::task::yield_now().await;
 
-            sender
-                .send(result.clone())
-                .map_err(|err| anyhow!("error broadcasting task result: {}", err.to_string()))?;
-
             let _ = entry.remove();
+
+            if let Err(err) = sender.send(result.clone()) {
+                error!(error = err.to_string(), "unable to broadcast task result");
+            }
+
             return Ok(result);
         }
         // Some other task will make the request so this task should just await for the result.
