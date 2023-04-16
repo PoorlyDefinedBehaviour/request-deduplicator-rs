@@ -1,6 +1,6 @@
 # About
 
-Deduplicate tasks based on a key.
+Deduplicate tasks based on a key. Tasks that start executing while there's another task already executing with the same key will wait for the result of the first task instead of performing the computation again.
 
 # Add to your dependencies
 
