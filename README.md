@@ -6,7 +6,7 @@ Deduplicate tasks based on a key. Tasks that start executing while there's anoth
 
 ```toml
 [dependencies]
-request_deduplicator = { git = "https://github.com/poorlydefinedbehaviour/request-deduplicator-rs", tag = "v0.0.2" }
+request_deduplicator = { git = "https://github.com/poorlydefinedbehaviour/request-deduplicator-rs", tag = "v0.0.3" }
 ```
 
 # Example
